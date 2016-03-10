@@ -33,7 +33,6 @@ extras_require = {
     ],
 }
 
-
 setup(
     name="baseplate",
     version="0.5.0",
@@ -44,6 +43,10 @@ setup(
 
     test_suite="tests",
     tests_require=tests_require,
+
+    scripts=[
+        "bin/baseplate-serve{:d}".format(sys.version_info.major),
+    ],
 
     # the thrift compiler must be able to find baseplate.thrift to build
     # services which extend BaseplateService.
@@ -57,5 +60,20 @@ setup(
         "distutils.commands": [
             "build_thrift = baseplate.integration.thrift.command:BuildThriftCommand",
         ],
+
+        "console_scripts": [
+            "baseplate-healthcheck{:d} = baseplate.server.healthcheck:run_healthchecks".format(sys.version_info.major),
+        ],
     },
+
+    classifiers=[
+        "Development Status :: 5 - Production/Stable",
+        "License :: OSI Approved :: BSD License",
+        "Operating System :: POSIX :: Linux",
+        "Programming Language :: Python",
+        "Programming Language :: Python :: 2.7",
+        "Programming Language :: Python :: 3.4",
+        "Topic :: Software Development :: Libraries",
+        "Topic :: Software Development :: Libraries :: Application Frameworks",
+    ],
 )
